@@ -37,6 +37,11 @@ app.listen(PORT, () => {
     console.log(`Server running on ${PORT}`)
 })
 
+// Maybe listening to / will make Render work..?
+app.get('/', (req, res) => {
+    res.send('Hello World!')
+})
+
 app.get('/api/persons/', (request, response) => {
     response.json(phonebookEntries)
 })
