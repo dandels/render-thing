@@ -2,7 +2,7 @@ const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
 const app = express()
-app.use(cors)
+app.use(cors())
 app.use(express.json())
 morgan.token('body', function getBody(req) {
     return JSON.stringify(req.body)
@@ -31,16 +31,6 @@ const phonebookEntries = [
         "number": "39-23-6423122"
     }
 ]
-
-const PORT = process.env.PORT || 3001
-app.listen(PORT, () => {
-    console.log(`Server running on ${PORT}`)
-})
-
-// Maybe listening to / will make Render work..?
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-})
 
 app.get('/api/persons/', (request, response) => {
     response.json(phonebookEntries)
@@ -84,4 +74,9 @@ app.get('/info', (request, response) => {
     const date = Date().toString()
     response.end(`Phonebook has info for ${phonebookEntries.length} people\n${date}`
     )
+})
+
+const PORT = process.env.PORT || 3001
+app.listen(PORT, () => {
+    console.log(`Server running on ${PORT}`)
 })
